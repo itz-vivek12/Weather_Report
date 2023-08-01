@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.weather.models.Weather;
 import com.weather.models.WeatherData;
 import com.weather.models.WeatherDataWrapper;
 import com.weather.service.WeatherService;
@@ -50,16 +50,8 @@ public class WeatherController {
 				selectedWeatherDatas = new ArrayList<>();
 				selectedWeatherDatas = weatherService.getWeatherDataByDate(weatherDatas, date);
 				System.out.println();
-				System.out.println("Weather Information");
-				System.out.println("-------------------");
 				for (WeatherData weatherData : selectedWeatherDatas) {
-					for (Weather weather : weatherData.getWeather()) {
-						System.out.println("  ID:" + weather.getId());
-						System.out.println("  MAIN:" + weather.getMain());
-						System.out.println("  DESCRIPTION:" + weather.getDescription());
-						System.out.println("  ICON:" + weather.getIcon());
-						System.out.println();
-					}
+					System.out.println("Temperature: " + weatherData.getMain().getTemp());
 				}
 
 				System.out.println();
@@ -90,8 +82,7 @@ public class WeatherController {
 			case 0:
 				System.out.println();
 				System.out.println("Exiting the program. Goodbye!");
-				System.out.println();
-				break;
+				System.exit(0);
 			default:
 				System.out.println();
 				System.out.println("Invalid Option !");
