@@ -41,7 +41,7 @@ public class WeatherServiceImpl implements WeatherService {
 					break;
 				}
 			} catch (ParseException e) {
-				// Date format does not match, try the next pattern
+				
 			}
 		}
 
